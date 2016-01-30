@@ -5,7 +5,7 @@ $i = 0; //counter
 $sum = 0; //sum of numbers that match with the problem
 $num1 = 3;
 $num2 = 5;
-$below = 1000000000000;
+$below = 1000;
 
 $problem = <<<'XXX'
  Multiples of 3 and 5 <br><br>
