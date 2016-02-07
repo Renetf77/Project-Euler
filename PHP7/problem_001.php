@@ -1,4 +1,7 @@
 <?php
+
+require_once './model/model.php';
+
 $ttime=microtime(true);
 $env = []; //range of numbers to test
 $i = 0; //counter
@@ -6,7 +9,6 @@ $sum = 0; //sum of numbers that match with the problem
 $num1 = 3;
 $num2 = 5;
 $below = 1000;
-
 $problem = <<<'XXX'
  Multiples of 3 and 5 <br><br>
  <b>Problem 1</b><br>
@@ -23,41 +25,31 @@ echo "<br>";
 
 //Method 1 - Bruteforce
 $stime = microtime(true);
-for($i = 1; $i < $below; $i++)  {
-    if($i%$num1==0 or $i%$num2==0) {
-        $sum = $sum +$i;
+for($i = 1; $i < $below; $i++)  
+{
+    if($i%$num1==0 or $i%$num2==0) 
+    {
+        $sum += +$i;
     }
-};
-
+}
 $stime = microtime(true) - $stime;
-echo "<br>Method 1 - Bruteforce <br>";
-echo "<b>The sum of the multiples is: $sum </b><br>";
-echo "Total time to find solution method 1 was $stime seconds <br>";
+
+result("Bruteforce","sum of the multiples",$sum,"1",$stime);
 
 //Method 2 - Regression
 $stime = microtime(true);
 $sum = $num1/2*(int)(($below-1)/$num1)*(int)(($below-1+$num1)/$num1) + $num2/2*(int)(($below-1)/$num2)*(int)(($below-1+$num2)/$num2) - ($num1*$num2)/2*(int)(($below-1)/($num1*$num2))*(int)(($below-1+$num1*$num2)/($num1*$num2));
 $stime = microtime(true) - $stime;
-echo "<br>Method 2 - Regression <br>";
-echo "<b>The sum of the multiples is: $sum </b><br>";
-echo "Total time to find solution method 2 was $stime seconds <br>";
 
-//Method 3 - array_filter and array_reduce
-function mult35($num) {
-    return ($num%3==0 or $num%5==0);
-}
+result("Regression","sum of the multiples",$sum,"2",$stime);
 
-function soma($v, $w) {
-    $v += $w;
-    return $v;
-}
-
+//Method 3 - array_filter and array_sum
 $stime = microtime(true);
-$sum = array_reduce(array_filter(range(1,$below - 1),"mult35"),"soma") . "<br>";
+$sum = array_sum(array_filter(range(1,$below - 1),"mult35")) . "<br>";
 $stime = microtime(true) - $stime;
-echo "<br>Method 3 - array_filter and array_reduce <br>";
-echo "<b>The sum of the multiples is: $sum </b><br>";
-echo "Total time to find solution method 2 was $stime seconds <br>";
+
+result("array_filter and array_sum","sum of the multiples",$sum,"3",$stime);
+
 echo "Total time of php execution was " . (microtime(true) - $ttime) . " seconds <br>";
 
 //Arrays are slow and use a lot of memory
