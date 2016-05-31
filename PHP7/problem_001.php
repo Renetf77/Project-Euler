@@ -18,7 +18,7 @@ $problem = <<<'XXX'
  Find the sum of all the multiples of 3 or 5 below 1000. <br>
  source: https://projecteuler.net/problem=1 <br>
 XXX;
-
+echo "teste";
 //Title
 echo $problem ;
 echo "<br>";
