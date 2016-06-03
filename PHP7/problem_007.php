@@ -3,11 +3,11 @@
 require './model/model.php';
 require './vendor/rtf/classes/Problem7.php';
 
-echo "teste";
 use vendor\rtf\classes as pe;
-echo "teste";
-$ttime=microtime(false);
+
+$ttime=microtime(true);
 $stime=microtime(true);
+$nproblem = 7;
 $nprime = 10001;
 $problem = <<<XXX
 10001st prime<br><br>
